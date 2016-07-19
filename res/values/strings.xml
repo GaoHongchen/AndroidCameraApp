@@ -4,6 +4,6 @@
     <string name="app_name">AndroidCameraApp</string>    
     <string name="action_settings">Settings</string>
     <string name="action_resolutions">分辨率支持</string>
-    <string name="btnCapture">Capture</string>
+    <string name="btnCapture">拍 照</string>
 
 </resources>
