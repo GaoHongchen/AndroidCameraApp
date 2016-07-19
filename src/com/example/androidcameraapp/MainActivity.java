@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,6 +32,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 @SuppressWarnings("deprecation")
 public class MainActivity extends Activity {
@@ -40,6 +42,7 @@ public class MainActivity extends Activity {
 	//相机预览相关变量
 	private Camera mCamera;
 	private CameraPreview mPreview;
+	private String strResolutions="";
 	
 	//照片相关变量
 	private String pathPhotos; 	
@@ -50,12 +53,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		//照片路径初始化
-		dirDCIM = Environment
-				.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
-		pathPhotos = dirDCIM.toString() + "/" + dirPhotos;
-		
+				
 		Window window = getWindow();//得到窗口
 		//requestWindowFeature(Window.FEATURE_NO_TITLE);//没有标题
 		//window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏
@@ -68,9 +66,13 @@ public class MainActivity extends Activity {
 		int widthWin = outMetrics.widthPixels;
 		//int heightWin = outMetrics.heightPixels;
 		
+		//照片路径初始化
+		dirDCIM = Environment
+				.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+		pathPhotos = dirDCIM.toString() + "/" + dirPhotos;
+		
 		// Create an instance of Camera
 		mCamera = getCameraInstance();
-
 		// Create our Preview view and set it as the content of our activity.
 		mPreview = new CameraPreview(this, mCamera);
 		mPreview.getHolder().setFixedSize(widthWin, widthWin/3*4);
@@ -83,13 +85,8 @@ public class MainActivity extends Activity {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub       
 				mCamera.takePicture(shutterCallback, rawCallback,null, mPicture);
-				new AlertDialog.Builder(MainActivity.this)
-            	.setTitle("照片保存成功")
-            	.setMessage("照片路径：\r\n"+pathPhotos)
-            	.setPositiveButton("确定",null)
-            	.show();
 				//弹出Toast提示按钮被点击了
-				//Toast.makeText(MainActivity.this,"Capture Camera & Save Photo Completed",Toast.LENGTH_SHORT).show();
+				Toast.makeText(MainActivity.this,"照片保存成功\r\n"+pathPhotos,Toast.LENGTH_SHORT).show();
 			}
 		});
 	}
@@ -108,6 +105,14 @@ public class MainActivity extends Activity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
+			return true;
+		}
+		if(id == R.id.action_resolutions){
+			new AlertDialog.Builder(MainActivity.this)
+        	.setTitle("分辨率支持")
+        	.setMessage(strResolutions)
+        	.setPositiveButton("确定",null)
+        	.show();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -178,17 +183,15 @@ public class MainActivity extends Activity {
 				Size sizeBetter = null;
 				List<Size> sizesBetter=new ArrayList<Size>();
 				float ratio=1.0f;
-//				String strResolutions="";
-//				//构造方法的字符格式这里如果小数不足2位,会以0补足.
-//				DecimalFormat decimalFormat=new DecimalFormat(".00");
+				//构造方法的字符格式这里如果小数不足2位,会以0补足.
+				DecimalFormat decimalFormat=new DecimalFormat(".00");
 				for (Size size : mSupportedPictureSizes) {					
 					int longer = size.height>=size.width ? size.height : size.width;
 					int smaller= size.height< size.width ? size.height : size.width;
 					ratio = (float)longer / smaller;
-//					strResolutions += 
-//							longer + " * " + smaller + 
-//							"  " + decimalFormat.format(ratio) + "\r\n";
-					
+					strResolutions += 
+							decimalFormat.format(ratio) + "  " + 
+							longer + " * " + smaller + "\r\n";
 					//范围不合适，在某些手机上容易闪退
 					if(longer==640 && smaller==480){
 						mSizeBest = size;
