@@ -1,4 +1,4 @@
-package com.example.UserCamera;
+package com.UserDevice.UserCamera;
 
 import java.io.IOException;
 import java.text.DecimalFormat;

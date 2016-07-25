@@ -1,6 +1,6 @@
 package com.example.androidcameraapp;
 
-import com.example.UserCamera.UserCamera;
+import com.UserDevice.UserCamera.UserCamera;
 
 import android.app.Activity;
 import android.app.AlertDialog;

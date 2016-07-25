@@ -1,4 +1,4 @@
-package com.example.UserCamera;
+package com.UserDevice.UserCamera;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,12 +19,7 @@ import android.util.Log;
 public class UserCamera{
 		
 	public Camera mCamera;
-	
-	//相机预览相关变量
 	public CameraPreview mPreview;
-	
-	//相机支持的分辨率
-	public String strResolutions="";
 	
 	//照片相关变量
 	public String pathPhotos; 	
@@ -41,8 +36,6 @@ public class UserCamera{
 		mCamera = getCameraInstance();
 		// Create our Preview view
 		mPreview = new CameraPreview(context, mCamera);
-		
-		strResolutions = mPreview.strResolutions;
 	}
 
 	/** A safe way to get an instance of the Camera object. */
