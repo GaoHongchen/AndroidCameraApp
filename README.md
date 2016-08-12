@@ -88,4 +88,11 @@ And we can modify the "Shape" color simply like this:
 
 **Link:** [http://stackoverflow.com/questions/7164630/how-to-change-shape-color-dynamically](http://stackoverflow.com/questions/7164630/how-to-change-shape-color-dynamically "How to change shape color dynamically?")
 
+### Android设置textView水平居中显示
 
+* 让textView里面的内容水平居中：android:gravity="center_horizontal"
+* 让textView控件在它的父布局里水平居中：android:layout_gravity="center_horizontal"
+
+### Android Camera Preview Stretched
+
+**Link:** [http://stackoverflow.com/questions/19577299/android-camera-preview-stretched](http://stackoverflow.com/questions/19577299/android-camera-preview-stretched)
