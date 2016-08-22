@@ -14,7 +14,6 @@ public class CamSelectActivity extends Activity {
 
 	private ListView lv;
 	private final String[] values = new String[]{"前置摄像头", "后置摄像头"};
-	private int nCamType;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +33,13 @@ public class CamSelectActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				// TODO Auto-generated method stub
-				nCamType = arg2;
+				Intent intent = new Intent();
+				intent.setClass(CamSelectActivity.this, MainActivity.class);
+				Bundle b = new Bundle();
+				b.putInt("camType", arg2);
+				intent.putExtras(b);
+				startActivity(intent);
+				CamSelectActivity.this.finish();
 			}	
 		});
 	}
@@ -44,17 +49,7 @@ public class CamSelectActivity extends Activity {
 		// TODO Auto-generated method stub
 		//return super.onKeyDown(keyCode, event);
 
-		if(keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0){
-			Intent intent = new Intent();
-			intent.setClass(CamSelectActivity.this, MainActivity.class);
-			Bundle b = new Bundle();
-			b.putInt("camType", nCamType);
-			intent.putExtras(b);
-			startActivity(intent);
-			CamSelectActivity.this.finish();
-		}
-
-		return false;
+		return true;
 	}
 
 }
