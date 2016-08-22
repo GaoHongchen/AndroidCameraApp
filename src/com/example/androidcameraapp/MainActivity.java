@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -75,6 +76,9 @@ public class MainActivity extends Activity {
 			Intent intent = new Intent();
 			intent.setClass(MainActivity.this, SettingActivity.class);
 			startActivity(intent);
+			MainActivity.this.finish();//跳转要关闭前一个activity
+			
+			//setContentView(R.layout.activity_setting);
 			return true;
 		}
 		if(id == R.id.action_resolutions){
@@ -87,4 +91,10 @@ public class MainActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		return super.onKeyDown(keyCode, event);
+	}	
 }
