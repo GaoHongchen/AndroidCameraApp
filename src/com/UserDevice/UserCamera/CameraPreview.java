@@ -5,6 +5,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.UserDevice.UserCamera.UserCamera.CameraType;
+
 import android.content.Context;
 import android.content.res.Configuration;
 import android.hardware.Camera;
@@ -22,6 +24,8 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 	
 	public String strResolutions="";
 	
+	private CameraType typeCam;
+	
 	private SurfaceHolder mHolder;
 	
 	private Camera mCamera;
@@ -29,9 +33,11 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 	private List<Camera.Size> mSupportedPreviewSizes;
 	private List<Camera.Size> mSupportedPictureSizes;
 
-	public CameraPreview(Context context, Camera camera) {
+	public CameraPreview(Context context, Camera camera,CameraType nCamType) {
 		super(context);
 		mCamera = camera;
+		
+		typeCam = nCamType;
 		
 		parameters = mCamera.getParameters();			
 		// supported preview sizes
@@ -52,17 +58,33 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
 	public void surfaceCreated(SurfaceHolder holder) {
 		try {
-			//orientation方向设置
-			if (this.getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE) {
-				parameters.set("orientation", "portrait");
-				mCamera.setDisplayOrientation(90);
-				// Uncomment for Android 2.0 and above
-				parameters.setRotation(90);
-			} else {
-				parameters.set("orientation", "landscape");
-				mCamera.setDisplayOrientation(0);
-				// Uncomment for Android 2.0 and above
-				parameters.setRotation(0);
+			if(typeCam == CameraType.CAMERA_BACK){
+				//orientation方向设置
+				if (this.getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE) {
+					parameters.set("orientation", "portrait");
+					mCamera.setDisplayOrientation(90);
+					// Uncomment for Android 2.0 and above
+					parameters.setRotation(90);
+				} else {
+					parameters.set("orientation", "landscape");
+					mCamera.setDisplayOrientation(0);
+					// Uncomment for Android 2.0 and above
+					parameters.setRotation(0);
+				}
+			}
+			if(typeCam == CameraType.CAMERA_FRONT){
+				//orientation方向设置
+				if (this.getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE) {
+					parameters.set("orientation", "portrait");
+					mCamera.setDisplayOrientation(90);
+					// Uncomment for Android 2.0 and above
+					parameters.setRotation(270);
+				} else {
+					parameters.set("orientation", "landscape");
+					mCamera.setDisplayOrientation(90);
+					// Uncomment for Android 2.0 and above
+					parameters.setRotation(90);
+				}
 			}
 			mCamera.setParameters(parameters);
 

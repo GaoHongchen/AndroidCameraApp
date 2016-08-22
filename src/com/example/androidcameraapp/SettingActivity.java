@@ -1,20 +1,35 @@
 package com.example.androidcameraapp;
 
-import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
-public class SettingActivity extends Activity {
+public class SettingActivity extends ListActivity {
 
-	/* (non-Javadoc)
-	 * @see android.app.Activity#onCreate(android.os.Bundle)
-	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_setting);
+		//setContentView(R.layout.activity_setting);
+		
+		String[] values = new String[] { "相机设置","关于" };
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, values);
+		setListAdapter(adapter);
+	}
+
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		// TODO Auto-generated method stub
+		//super.onListItemClick(l, v, position, id);
+		
+		String item = (String) getListAdapter().getItem(position);
+	    Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
 	}
 
 	@Override
@@ -31,6 +46,4 @@ public class SettingActivity extends Activity {
 		
 		return false;
 	}
-
-	
 }

@@ -18,6 +18,8 @@ import android.util.Log;
 @SuppressWarnings("deprecation")
 public class UserCamera{
 		
+	public static enum CameraType{CAMERA_FRONT,CAMERA_BACK};
+	private CameraType typeCam;
 	public Camera mCamera;
 	public CameraPreview mPreview;
 	
@@ -26,23 +28,67 @@ public class UserCamera{
 	private static File  dirDCIM;
 	private static final String dirPhotos = "AndroidCameraApp";
 	
-	public UserCamera(Context context){
+	public UserCamera(Context context,CameraType nCamType){
 		//照片路径初始化
 		dirDCIM = Environment
 				.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
 		pathPhotos = dirDCIM.toString() + "/" + dirPhotos;
 		
+		typeCam = nCamType;
+		
 		// Create an instance of Camera
 		mCamera = getCameraInstance();
 		// Create our Preview view
-		mPreview = new CameraPreview(context, mCamera);
+		mPreview = new CameraPreview(context, mCamera, typeCam);
 	}
 
+	private int FindFrontCamera(){  
+        int cameraCount = 0;  
+        Camera.CameraInfo cameraInfo = new Camera.CameraInfo();  
+        cameraCount = Camera.getNumberOfCameras(); // get cameras number  
+                
+        for ( int camIdx = 0; camIdx < cameraCount;camIdx++ ) {  
+            Camera.getCameraInfo( camIdx, cameraInfo ); // get camerainfo  
+            if ( cameraInfo.facing ==Camera.CameraInfo.CAMERA_FACING_FRONT ) {   
+                // 代表摄像头的方位，目前有定义值两个分别为CAMERA_FACING_FRONT前置和CAMERA_FACING_BACK后置  
+               return camIdx;  
+            }  
+        }  
+        return -1;  
+    }  
+ 
+    private int FindBackCamera(){  
+        int cameraCount = 0;  
+        Camera.CameraInfo cameraInfo = new Camera.CameraInfo();  
+        cameraCount = Camera.getNumberOfCameras(); // get cameras number  
+                
+        for ( int camIdx = 0; camIdx < cameraCount;camIdx++ ) {  
+            Camera.getCameraInfo( camIdx, cameraInfo ); // get camerainfo  
+            if ( cameraInfo.facing ==Camera.CameraInfo.CAMERA_FACING_BACK ) {   
+                // 代表摄像头的方位，目前有定义值两个分别为CAMERA_FACING_FRONT前置和CAMERA_FACING_BACK后置  
+               return camIdx;  
+            }  
+        }  
+        return -1;  
+    }  
+    
 	/** A safe way to get an instance of the Camera object. */
-	public static Camera getCameraInstance(){
+	public Camera getCameraInstance(){
 		Camera c = null;
 		try {
-			c = Camera.open(); // attempt to get a Camera instance
+			//c = Camera.open(); // attempt to get a Camera instance
+			switch(typeCam){
+			case CAMERA_FRONT:
+				int CammeraIndex=FindFrontCamera();  
+		        if(CammeraIndex==-1){  
+		            CammeraIndex=FindBackCamera();  
+		        }  
+		        c = Camera.open(CammeraIndex);
+				break;
+			case CAMERA_BACK:
+				c = Camera.open(FindBackCamera());
+				break;
+			} 
 		}
 		catch (Exception e){
 			// Camera is not available (in use or does not exist)

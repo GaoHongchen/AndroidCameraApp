@@ -20,6 +20,11 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 	
 	private UserCamera mUserCamera;
+	private int nCamType;
+	
+	public MainActivity(){
+		nCamType = 1;//默认后置摄像头
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +43,19 @@ public class MainActivity extends Activity {
 		int widthWin = outMetrics.widthPixels;
 		//int heightWin = outMetrics.heightPixels;
 		
-		mUserCamera = new UserCamera(this);	
+		try{
+			nCamType = getIntent().getExtras().getInt("camType");
+		}
+		catch(Exception e){
+		}
+		
+		if(nCamType == 0){
+			mUserCamera = new UserCamera(this,UserCamera.CameraType.CAMERA_FRONT);	
+		}
+		if(nCamType == 1){
+			mUserCamera = new UserCamera(this,UserCamera.CameraType.CAMERA_BACK);	
+		}
+
 		mUserCamera.SetPreviewSize(widthWin, widthWin/3*4);
 		//set it as the content of our activity.
 		FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
@@ -72,15 +89,23 @@ public class MainActivity extends Activity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
+		
 		if (id == R.id.action_settings) {
 			Intent intent = new Intent();
 			intent.setClass(MainActivity.this, SettingActivity.class);
 			startActivity(intent);
 			MainActivity.this.finish();//跳转要关闭前一个activity
-			
-			//setContentView(R.layout.activity_setting);
 			return true;
 		}
+		
+		if(id == R.id.action_camselect) {
+			Intent intent = new Intent();
+			intent.setClass(MainActivity.this, CamSelectActivity.class);
+			startActivity(intent);
+			MainActivity.this.finish();//跳转要关闭前一个activity
+			return true;
+		}
+		
 		if(id == R.id.action_resolutions){
 			new AlertDialog.Builder(MainActivity.this)
         	.setTitle("分辨率支持")
@@ -89,6 +114,7 @@ public class MainActivity extends Activity {
         	.show();
 			return true;
 		}
+		
 		return super.onOptionsItemSelected(item);
 	}
 
