@@ -96,3 +96,11 @@ And we can modify the "Shape" color simply like this:
 ### Android Camera Preview Stretched
 
 **Link:** [http://stackoverflow.com/questions/19577299/android-camera-preview-stretched](http://stackoverflow.com/questions/19577299/android-camera-preview-stretched)
+
+### Using lists in Android (ListView) - Tutorial
+
+**Link:** [http://www.vogella.com/tutorials/AndroidListView/article.html](http://www.vogella.com/tutorials/AndroidListView/article.html)
+
+### 两个Activity之间通过Intent传值
+
+**Link:** [http://blog.csdn.net/aboy123/article/details/8567057](http://blog.csdn.net/aboy123/article/details/8567057)
