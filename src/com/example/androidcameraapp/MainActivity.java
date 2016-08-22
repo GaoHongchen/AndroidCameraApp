@@ -4,6 +4,7 @@ import com.UserDevice.UserCamera.UserCamera;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Menu;
@@ -71,6 +72,9 @@ public class MainActivity extends Activity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
+			Intent intent = new Intent();
+			intent.setClass(MainActivity.this, SettingActivity.class);
+			startActivity(intent);
 			return true;
 		}
 		if(id == R.id.action_resolutions){
