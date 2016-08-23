@@ -22,6 +22,8 @@ public class CamSelectActivity extends Activity {
 		
 		setContentView(R.layout.activity_camselect);
 		
+		setTitle(R.string.activity_name_camselect);
+		
 		lv = (ListView) findViewById(R.id.lv);
 		lv.setAdapter(new ArrayAdapter<String>(this,
 		                android.R.layout.simple_list_item_single_choice, values));

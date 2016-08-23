@@ -30,7 +30,9 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-				
+		
+		setTitle(R.string.activity_name_main);
+		
 		Window window = getWindow();//得到窗口
 		//requestWindowFeature(Window.FEATURE_NO_TITLE);//没有标题
 		//window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏

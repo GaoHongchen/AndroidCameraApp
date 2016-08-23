@@ -20,8 +20,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/activity_name_main" >
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,12 +28,10 @@
             </intent-filter>
         </activity>
         <activity 
-            android:name="CamSelectActivity"
-            android:label="@string/activity_name_camselect" >
+            android:name="CamSelectActivity" >
         </activity>
         <activity 
-            android:name="SettingActivity"
-            android:label="@string/activity_name_setting" >
+            android:name="SettingActivity" >
         </activity>
     </application>
 
