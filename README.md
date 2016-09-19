@@ -19,6 +19,9 @@ An Android Camera Project with ADT
 * [https://github.com/inferjay/AndroidDevTools](https://github.com/inferjay/AndroidDevTools "AndroidDevTools")
 * [http://www.ibm.com/developerworks/opensource/tutorials/os-eclipse-androidwidget/](http://www.ibm.com/developerworks/opensource/tutorials/os-eclipse-androidwidget/ "Introduction to Android development Using Eclipse and Android widgets")
 
+## OpenCV for Android
+[http://opencv.org/platforms/android.html](http://opencv.org/platforms/android.html "OpenCV for Android")
+
 ## Gyroscope
 * GyroscopeExplorer App: [https://github.com/KEOpenSource/GyroscopeExplorer](https://github.com/KEOpenSource/GyroscopeExplorer)
 
