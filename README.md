@@ -63,7 +63,8 @@ opencv for android 教程（环境搭建篇）：
 ## Android Camera
 * [http://opencamera.org.uk/](http://opencamera.org.uk/ "Open Camera")
 * [http://blog.rhesoft.com/2015/04/02/tutorial-how-to-use-camera-with-android-and-android-studio/](http://blog.rhesoft.com/2015/04/02/tutorial-how-to-use-camera-with-android-and-android-studio/ "How to use camera with Android and Android Studio")
-* [http://junjunguo.com/articles/android-take-photo-show-in-list-view/](http://junjunguo.com/articles/android-take-photo-show-in-list-view/ "Android take photo and save to gallery, choose photo from gallery and show in ListView")
+* [http://junjunguo.com/articles/android-take-photo-show-in-list-view/](http://junjunguo.com/articles/android-take-photo-show-in-list-view/ "Android take photo and save to gallery, choose photo from gallery and show in ListView")  
+
 ### Issues
 * [http://stackoverflow.com/questions/8744994/android-camera-set-resolution](http://stackoverflow.com/questions/8744994/android-camera-set-resolution "Android Camera Set Resolution")
 * [http://stackoverflow.com/questions/10913181/camera-preview-is-not-restarting](http://stackoverflow.com/questions/10913181/camera-preview-is-not-restarting "camera preview is not restarting?")
@@ -73,6 +74,15 @@ opencv for android 教程（环境搭建篇）：
 ## Gyroscope
 * GyroscopeExplorer App: [https://github.com/KEOpenSource/GyroscopeExplorer](https://github.com/KEOpenSource/GyroscopeExplorer)
 * [http://www.41post.com/3745/programming/android-acessing-the-gyroscope-sensor-for-simple-applications](http://www.41post.com/3745/programming/android-acessing-the-gyroscope-sensor-for-simple-applications "Android: Acessing the gyroscope sensor for simple applications")
+
+## DateTimePicker Control
+* [http://blog.csdn.net/u012246458/article/details/49800271](http://blog.csdn.net/u012246458/article/details/49800271 "日期选择器 - Android自定义DataTimePicker以及日期范围限制")
+* [http://blog.csdn.net/csdnadcode/article/details/39555519](http://blog.csdn.net/csdnadcode/article/details/39555519 "Android DatePicker 限制日期选择范围")
+* [http://blog.csdn.net/njweiyukun/article/details/50338183](http://blog.csdn.net/njweiyukun/article/details/50338183 "Android中DatePicker只显示年月的方法")
+
+## 自定义对话框
+* [http://www.cnblogs.com/weixing/archive/2013/08/14/3257077.html](http://www.cnblogs.com/weixing/archive/2013/08/14/3257077.html "Android自定义对话框(Dialog)位置,大小")
+* [http://blog.csdn.net/fancylovejava/article/details/21617553](http://blog.csdn.net/fancylovejava/article/details/21617553 "Android自定义对话框(Dialog)位置,大小")
 
 ## Issues ##
 
