@@ -19,6 +19,24 @@ An Android Camera Project with ADT
 * [https://github.com/inferjay/AndroidDevTools](https://github.com/inferjay/AndroidDevTools "AndroidDevTools")
 * [http://www.ibm.com/developerworks/opensource/tutorials/os-eclipse-androidwidget/](http://www.ibm.com/developerworks/opensource/tutorials/os-eclipse-androidwidget/ "Introduction to Android development Using Eclipse and Android widgets")
 
+## 应用打包
+在Eclipse中将Android工程打包成apk。
+
+* 生成keystore文件
+
+    keytool -genkey -alias Camera -keyalg RSA -validity 100000 -keystore AndroidCameraApp.keystore
+
+* 签名Apk文件
+
+（1）在Eclipse中右键单击项目名称，选择"Android Tools"，再选择"Export Signed Application Package…"；  
+（2）使用第三方工具：**爱加密签名工具**；  
+（3）使用命令行：  
+
+    jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore E:\AndroidCameraApp.keystore -storepass 123456 -keypass 123456 -signedjar E:\signed.apk E:\unsign.apk Camera
+
+## 应用认领
+应用认领那些事：[http://droidyue.com/blog/2014/12/14/android-yingyong-renling/?utm_source=tuicool&utm_medium=referral](http://droidyue.com/blog/2014/12/14/android-yingyong-renling/?utm_source=tuicool&utm_medium=referral)
+
 ## OpenCV for Android
 [http://opencv.org/platforms/android.html](http://opencv.org/platforms/android.html "OpenCV for Android")
 
@@ -26,6 +44,10 @@ An Android Camera Project with ADT
 * GyroscopeExplorer App: [https://github.com/KEOpenSource/GyroscopeExplorer](https://github.com/KEOpenSource/GyroscopeExplorer)
 
 ## Issues ##
+
+### Android APP必须卸载才能安装这是怎么回事啊？
+只有包名和签名一致的情况下才能替换应用。若只有包名相同，尝试替换时会因为签名不一致而遭到拒绝。  
+Eclipse中bin目录下生成的apk文件自带一个debug签名，导出apk又需要自定义一个签名，两次的签名不一致，所以导致安装失败了。
 
 ### How to draw rectangle in XML? ###
 
