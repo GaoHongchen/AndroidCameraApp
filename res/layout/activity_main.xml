@@ -40,6 +40,6 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
         android:text="@string/btnCapture"
-        android:textSize="30sp"/>
+        android:textSize="20sp"/>
 		<!-- android:background="@drawable/capture" -->
 </RelativeLayout>

@@ -20,9 +20,9 @@ import android.view.SurfaceView;
 @SuppressWarnings("deprecation")
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback{
 
-	private static final String TAG = "ErrorTag";
+	private static final String ERROR_TAG = "CameraPreview";
 	
-	public String strResolutions="";
+	public String mStrResolutions="";
 	
 	private CameraType typeCam;
 	
@@ -91,8 +91,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 			//resolution手机相机分辨率设置
 			// Iterate through all available resolutions and choose one.
 			// The chosen resolution will be stored in mSize.
-			Size mSizeBest = null;
-			Size sizeBetter = null;
+
 			List<Size> sizesBetter=new ArrayList<Size>();
 			float ratio=1.0f;
 			//构造方法的字符格式这里如果小数不足2位,会以0补足.
@@ -101,52 +100,50 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 				int longer = size.height>=size.width ? size.height : size.width;
 				int smaller= size.height< size.width ? size.height : size.width;
 				ratio = (float)longer / smaller;
-				strResolutions += 
+				mStrResolutions += 
 						decimalFormat.format(ratio) + "  " + 
 						longer + " * " + smaller + "\r\n";
-				//范围不合适，在某些手机上容易闪退
-				if(longer==640 && smaller==480){
-					mSizeBest = size;
-					break;
-				}
-				if(ratio>1.3 && ratio<1.4 && longer>640 && longer<5000){
+//				//范围不合适，在某些手机上容易闪退
+//				if(longer==640 && smaller==480){
+//					mSizeBest = size;
+//					break;
+//				}
+				if(ratio>1.3 && ratio<1.4 && longer>1000 && longer<5000){
 					sizesBetter.add(size);
 				}
-			} 
-			if(mSizeBest!=null)
-			{
-				parameters.setPictureSize(mSizeBest.width, mSizeBest.height);
+			}
+			
+			Size sizeBetter = null;
+			//getBetterSizes(mStrBuilderResolutions,sizesBetter);
+			Log.e(ERROR_TAG, "mStrResolutions: " + mStrResolutions);
+
+			int nSize = sizesBetter.size();
+			if(nSize>0){
+				sizeBetter = sizesBetter.get(0);
+				int longer = sizeBetter.height>=sizeBetter.width ? sizeBetter.height : sizeBetter.width;					
+				int minLonger = longer;
+				int indexMin = 0;
+				for(int i=0;i<nSize;i++){
+					sizeBetter = sizesBetter.get(i);
+					longer = sizeBetter.height>=sizeBetter.width ? sizeBetter.height : sizeBetter.width;						
+					if(longer < minLonger){
+						minLonger = longer;
+						indexMin = i;
+					}
+				}
+				sizeBetter = sizesBetter.get(indexMin);
+			}
+			if(sizeBetter!=null){
+				parameters.setPictureSize(sizeBetter.width, sizeBetter.height);
 				mCamera.setParameters(parameters);
 			}
-			else
-			{
-				int nSize = sizesBetter.size();
-				if(nSize>0){
-					sizeBetter = sizesBetter.get(0);
-					int longer = sizeBetter.height>=sizeBetter.width ? sizeBetter.height : sizeBetter.width;					
-					int minLonger = longer;
-					int indexMin = 0;
-					for(int i=0;i<nSize;i++){
-						sizeBetter = sizesBetter.get(i);
-						longer = sizeBetter.height>=sizeBetter.width ? sizeBetter.height : sizeBetter.width;						
-						if(longer < minLonger){
-							minLonger = longer;
-							indexMin = i;
-						}
-					}
-					sizeBetter = sizesBetter.get(indexMin);
-				}
-				if(sizeBetter!=null){
-					parameters.setPictureSize(sizeBetter.width, sizeBetter.height);
-					mCamera.setParameters(parameters);
-				}
-			}
+				
 			//when the surface is created, we can set the camera to draw images in this surfaceholder
 			mCamera.setPreviewDisplay(mHolder);
 			mCamera.startPreview(); 
 		} catch (IOException e) {
 			mCamera.release();
-			Log.e(TAG, "Camera error on surfaceCreated " + e.getMessage());
+			Log.e(ERROR_TAG, "Camera error on surfaceCreated " + e.getMessage());
 		}
 	}
 
@@ -178,38 +175,14 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 		// reformatting changes here
 		
 		// start preview with new settings
-		try {	
-			Size mSizeBest = null;
-			List<Size> sizesBetter=new ArrayList<Size>();
-			float ratio=1.0f;
-			for (Size size : mSupportedPreviewSizes) {					
-				int longer = size.height>=size.width ? size.height : size.width;
-				int smaller= size.height< size.width ? size.height : size.width;
-				ratio = (float)longer / smaller;
-				//范围不合适，在某些手机上容易闪退
-				if(longer==640 && smaller==480){
-					mSizeBest = size;
-					break;
-				}
-				if(ratio>1.3 && ratio<1.4 && longer>640 && longer<5000){
-					sizesBetter.add(size);
-				}
-			} 
-			if(mSizeBest!=null)
-			{
-				parameters.setPreviewSize(mSizeBest.width, mSizeBest.height);
-			}
-			else
-			{
-				//parameters.setPreviewSize(mOptimalPreviewSize.width, mOptimalPreviewSize.height);
-			}
+		try {
 			mCamera.setParameters(parameters);
             
 			mCamera.setPreviewDisplay(mHolder);
 			mCamera.startPreview();
 
 		} catch (Exception e){
-			Log.d(TAG, "Error starting camera preview: " + e.getMessage());
+			Log.e(ERROR_TAG, "Error starting camera preview: " + e.getMessage());
 		}
 	}
 }

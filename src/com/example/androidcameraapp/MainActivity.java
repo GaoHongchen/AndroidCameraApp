@@ -112,7 +112,7 @@ public class MainActivity extends Activity {
 		if(id == R.id.action_resolutions){
 			new AlertDialog.Builder(MainActivity.this)
         	.setTitle("分辨率支持")
-        	.setMessage(mUserCamera.mPreview.strResolutions)
+        	.setMessage(mUserCamera.mPreview.mStrResolutions)
         	.setPositiveButton("确定",null)
         	.show();
 			return true;

@@ -6,10 +6,19 @@ An Android Camera Project with ADT.
 ## Development Requirements ##
 
 - JDK
-- Eclipse ==> eclipse-java-mars-R-win32
-- ADT ==> ADT-23.0.7.zip
-- Android SDK ==> installer_r24.4.1-windows.exe
-- EGit ==> http://download.eclipse.org/egit/updates/
+- Eclipse
+  * Eclipse IDE for Java Developers
+- EGit
+  * online install: http://download.eclipse.org/egit/updates/
+- ADT
+  * online install: https://dl-ssl.google.com/android/eclipse/
+  * offline install: Location：[jar:file:ADT-23.0.7.zip]()
+- Android SDK
+  * online install: http://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
+  * offline install: installer_r24.4.1-windows.exe
+  * [Android SDK开发包国内下载地址](http://www.cnblogs.com/bjzhanghao/archive/2012/11/14/android-platform-sdk-download-mirror.html)
+- [AndroidDevTools](https://github.com/inferjay/AndroidDevTools)
+
 
 ## Android Sites
 
@@ -19,17 +28,11 @@ An Android Camera Project with ADT.
 * [http://www.appsrox.com/](http://www.appsrox.com/ "Learn Android Development | Download Free Apps")
 * [http://www.eoeandroid.com/forum.php](http://www.eoeandroid.com/forum.php "Android开发者社区")
 * [http://wear.techbrood.com/index.html](http://wear.techbrood.com/index.html "Android安卓开发官方文档 - Techbrood踏得网国内镜像站点")
-* [http://tools.android.com/](http://tools.android.com/ "Android Studio Project Site")
 * [http://www.android-studio.com.cn/](http://www.android-studio.com.cn/)
 * [http://www.android100.org/](http://www.android100.org/)
 * [http://www.csdn.net/article/2015-07-30/2825333](http://www.csdn.net/article/2015-07-30/2825333 "开发第一个Android应用之前你需要知道的六件事")
 
 ## 环境搭建 ##
-
-* [http://www.cnblogs.com/zoupeiyang/p/4034517.html](http://www.cnblogs.com/zoupeiyang/p/4034517.html "五步搞定Android开发环境部署")
-* [http://my.oschina.net/bbdlg/blog/115345?p={{page}}](http://my.oschina.net/bbdlg/blog/115345?p={{page}} "在android的eclipse开发环境中配置git环境")
-* [http://www.cnblogs.com/bjzhanghao/archive/2012/11/14/android-platform-sdk-download-mirror.html](http://www.cnblogs.com/bjzhanghao/archive/2012/11/14/android-platform-sdk-download-mirror.html "Android SDK开发包国内下载地址")
-* [https://github.com/inferjay/AndroidDevTools](https://github.com/inferjay/AndroidDevTools "AndroidDevTools")
 * [http://www.ibm.com/developerworks/opensource/tutorials/os-eclipse-androidwidget/](http://www.ibm.com/developerworks/opensource/tutorials/os-eclipse-androidwidget/ "Introduction to Android development Using Eclipse and Android widgets")
 
 ## 程序调试
@@ -47,8 +50,9 @@ An Android Camera Project with ADT.
 （1）在Eclipse中右键单击项目名称，选择"Android Tools"，再选择"Export Signed Application Package…"；  
 （2）使用第三方工具：**爱加密签名工具**；  
 （3）使用命令行：  
-
+```
     jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore E:\AndroidCameraApp.keystore -storepass 123456 -keypass 123456 -signedjar E:\signed.apk E:\unsign.apk Camera
+```
 
 ## 应用认领
 应用认领那些事：   
@@ -86,17 +90,13 @@ opencv for android 教程（环境搭建篇）：
 
 ## Issues ##
 
-### Android APP必须卸载才能安装这是怎么回事啊？
-只有包名和签名一致的情况下才能替换应用。若只有包名相同，尝试替换时会因为签名不一致而遭到拒绝。  
-Eclipse中bin目录下生成的apk文件自带一个debug签名，导出apk又需要自定义一个签名，两次的签名不一致，所以导致安装失败了。
-
 ### How to draw rectangle in XML? ###
 
 We can create a new XML file inside the drawable folder, and add the following code, then save it as rectangle.xml.
 
 	<?xml version="1.0" encoding="utf-8"?>
 	<shape xmlns:android="http://schemas.android.com/apk/res/android" >
-	    <solid 
+	    <solid
 	        android:color="@android:color/transparent" />
 	    <stroke
 	        android:width="2dip"
@@ -107,10 +107,10 @@ We can create a new XML file inside the drawable folder, and add the following c
 
 To use it inside a layout we would set the **android:background** attribute to the new drawable shape,like the following code segment.
 
-	<ImageView 
-		android:id="@+id/rectimage" 
-		android:layout_height="100dp" 
-		android:layout_width="100dp" 
+	<ImageView
+		android:id="@+id/rectimage"
+		android:layout_height="100dp"
+		android:layout_width="100dp"
 		android:src="@drawable/rectangle">
 	</ImageView>
 
@@ -123,12 +123,12 @@ finally,have a fun!
 The "Shape" code in circle2.xml is as like the following segments:
 
     <?xml version="1.0" encoding="utf-8"?>
-	<shape 
+	<shape
 	    xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:id="@+id/shape_circle2"
 	    android:shape="oval"
 	    android:useLevel="false" >	        
-	    <solid 
+	    <solid
 	        android:color="@android:color/transparent" />	    
 	    <stroke
 	        android:width="1dp"
@@ -140,10 +140,10 @@ The "Shape" code in circle2.xml is as like the following segments:
 
 The code using "Shape" is as follows:
 
-	<ImageView 
-		android:id="@+id/circle_img" 
-		android:layout_height="50dp" 
-		android:layout_width="50dp" 
+	<ImageView
+		android:id="@+id/circle_img"
+		android:layout_height="50dp"
+		android:layout_width="50dp"
 		android:background="@drawable/circle">
 	</ImageView>
 
@@ -174,7 +174,7 @@ And we can modify the "Shape" color simply like this:
 
 **Link:** [http://blog.csdn.net/aboy123/article/details/8567057](http://blog.csdn.net/aboy123/article/details/8567057)
 
-### 解决Butter Knife空指针问题(在eclipse中使用) 
+### 解决Butter Knife空指针问题(在eclipse中使用)
 [http://blog.163.com/www_iloveyou_com/blog/static/211658372201552421557741/](http://blog.163.com/www_iloveyou_com/blog/static/211658372201552421557741/)
 
 ### android实现顶部底部固定 中间可滑动
