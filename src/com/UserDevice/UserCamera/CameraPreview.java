@@ -20,7 +20,7 @@ import android.view.SurfaceView;
 @SuppressWarnings("deprecation")
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback{
 
-	private static final String ERROR_TAG = "CameraPreview";
+	private static final String LOG_TAG = "GaoHCLog-->CameraPreview";
 	
 	public String mStrResolutions="";
 	
@@ -35,24 +35,33 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
 	public CameraPreview(Context context, Camera camera,CameraType nCamType) {
 		super(context);
+		if(camera == null){
+			Log.e(LOG_TAG, "CameraPreview: camera == null");
+			return;
+		}
 		mCamera = camera;
 		
 		typeCam = nCamType;
 		
-		parameters = mCamera.getParameters();			
-		// supported preview sizes
-        mSupportedPreviewSizes = parameters.getSupportedPreviewSizes();
-        // Check what resolutions are supported by your camera
-		mSupportedPictureSizes = parameters.getSupportedPictureSizes();
+		try{
+			parameters = mCamera.getParameters();			
+			// supported preview sizes
+	        mSupportedPreviewSizes = parameters.getSupportedPreviewSizes();
+	        // Check what resolutions are supported by your camera
+			mSupportedPictureSizes = parameters.getSupportedPictureSizes();
 
-		// Install a SurfaceHolder.Callback so we get notified when the
-		// underlying surface is created and destroyed.
-		mHolder = getHolder();
-		mHolder.addCallback(this);
-		//deprecated setting, but required on Android versions prior to 3.0
-		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
-		{
-			mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+			// Install a SurfaceHolder.Callback so we get notified when the
+			// underlying surface is created and destroyed.
+			mHolder = getHolder();
+			mHolder.addCallback(this);
+			//deprecated setting, but required on Android versions prior to 3.0
+			if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
+			{
+				mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+			}
+		}
+		catch(Exception e){
+			Log.e(LOG_TAG, "CameraPreview: exception");
 		}
 	}
 
@@ -115,7 +124,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 			
 			Size sizeBetter = null;
 			//getBetterSizes(mStrBuilderResolutions,sizesBetter);
-			Log.e(ERROR_TAG, "mStrResolutions: " + mStrResolutions);
+			Log.i(LOG_TAG, "mStrResolutions: " + mStrResolutions);
 
 			int nSize = sizesBetter.size();
 			if(nSize>0){
@@ -143,7 +152,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 			mCamera.startPreview(); 
 		} catch (IOException e) {
 			mCamera.release();
-			Log.e(ERROR_TAG, "Camera error on surfaceCreated " + e.getMessage());
+			Log.e(LOG_TAG, "Camera error on surfaceCreated " + e.getMessage());
 		}
 	}
 
@@ -182,7 +191,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 			mCamera.startPreview();
 
 		} catch (Exception e){
-			Log.e(ERROR_TAG, "Error starting camera preview: " + e.getMessage());
+			Log.e(LOG_TAG, "Error starting camera preview: " + e.getMessage());
 		}
 	}
 }

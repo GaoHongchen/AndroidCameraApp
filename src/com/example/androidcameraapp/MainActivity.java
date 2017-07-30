@@ -3,11 +3,16 @@ package com.example.androidcameraapp;
 import com.UserDevice.Sensors.OrientationSensor;
 import com.UserDevice.UserCamera.UserCamera;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,7 +27,9 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
-	private UserCamera mUserCamera;
+	private static final String LOG_TAG = "GaoHCLog-->MainActivity";
+	
+	private UserCamera mUserCamera=null;
 	private int nCamType;
 	private int widthCameraPreview;
 	private int heightCameraPreview;
@@ -44,6 +51,14 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		setTitle(R.string.activity_name_main);
+
+		// check Android 6 permission
+		if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+			Log.i(LOG_TAG, "Granted");
+		} else {
+			// 1 can be another integer
+			ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA }, 1);
+		}
 		
 		Window window = getWindow();//得到窗口
 		//requestWindowFeature(Window.FEATURE_NO_TITLE);//没有标题
@@ -179,18 +194,32 @@ public class MainActivity extends Activity {
 			nCamType = getIntent().getExtras().getInt("camType");
 		}
 		catch(Exception e){
+			Log.e(LOG_TAG, "InitUserCamera: getIntent().getExtras().getInt(camType) exception");
 		}
 		
-		if(nCamType == 0){
-			mUserCamera = new UserCamera(this,UserCamera.CameraType.CAMERA_FRONT);	
-		}
-		if(nCamType == 1){
-			mUserCamera = new UserCamera(this,UserCamera.CameraType.CAMERA_BACK);	
-		}
+		Log.i(LOG_TAG, "InitUserCamera: nCamType = "+String.valueOf(nCamType));
 
-		mUserCamera.SetPreviewSize(widthCameraPreview, heightCameraPreview);
-		//set it as the content of our activity.
-		FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
-		preview.addView(mUserCamera.mPreview);
+		try{
+			if(nCamType == 0){
+				mUserCamera = new UserCamera(this,UserCamera.CameraType.CAMERA_FRONT);	
+			}
+			if(nCamType == 1){
+				mUserCamera = new UserCamera(this,UserCamera.CameraType.CAMERA_BACK);	
+			}
+			
+			if(mUserCamera.mCamera != null){
+				Log.i(LOG_TAG, "InitUserCamera: mUserCamera.mCamera != null");
+				mUserCamera.SetPreviewSize(widthCameraPreview, heightCameraPreview);
+				//set it as the content of our activity.
+				FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+				preview.addView(mUserCamera.mPreview);
+			}
+			else{
+				Log.e(LOG_TAG, "InitUserCamera: mUserCamera.mCamera == null");
+			}
+		}
+		catch(Exception e){
+			Log.e(LOG_TAG, "InitUserCamera: new UserCamera() exception");
+		}
 	}
 }
