@@ -1,11 +1,13 @@
-package com.example.androidcameraapp;
+package com.chenguang.camera;
 
 import com.UserDevice.Sensors.OrientationSensor;
+import com.UserDevice.UserCamera.CameraPreview;
 import com.UserDevice.UserCamera.UserCamera;
+import com.chenguang.camera.R;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -30,7 +32,7 @@ public class MainActivity extends Activity {
 	private static final String LOG_TAG = "GaoHCLog-->MainActivity";
 	
 	private UserCamera mUserCamera=null;
-	private int nCamType;
+	private int nCamSelected;
 	private int widthCameraPreview;
 	private int heightCameraPreview;
 	
@@ -42,23 +44,19 @@ public class MainActivity extends Activity {
 	private OrientationSensor orientationSensor;
 	
 	public MainActivity(){
-		nCamType = 1;//默认后置摄像头
+		nCamSelected = 1;//默认后置摄像头
 	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
 		
+		super.onCreate(savedInstanceState);
+		
+		//获得操作Camera的权限
+		CheckCameraPermission(this);
+		
+		setContentView(R.layout.activity_main);
 		setTitle(R.string.activity_name_main);
-
-		// check Android 6 permission
-		if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-			Log.i(LOG_TAG, "Granted");
-		} else {
-			// 1 can be another integer
-			ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA }, 1);
-		}
 		
 		Window window = getWindow();//得到窗口
 		//requestWindowFeature(Window.FEATURE_NO_TITLE);//没有标题
@@ -94,6 +92,17 @@ public class MainActivity extends Activity {
 		});
 	}
 
+	private void CheckCameraPermission(Context context) {
+		// check Android 6 permission
+		if (ContextCompat.checkSelfPermission(context,
+				Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+			Log.i(LOG_TAG, "CheckCameraPermission: Granted");
+		} else {
+			// 1 can be another integer
+			ActivityCompat.requestPermissions((Activity) context, new String[] { Manifest.permission.CAMERA }, 1);
+		}
+	}  
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -109,27 +118,48 @@ public class MainActivity extends Activity {
 		int id = item.getItemId();
 		
 		if (id == R.id.action_settings) {
-			Intent intent = new Intent();
-			intent.setClass(MainActivity.this, SettingActivity.class);
-			startActivity(intent);
-			MainActivity.this.finish();//跳转要关闭前一个activity
+			try{
+				Intent intent = new Intent();
+				intent.setClass(MainActivity.this, SettingActivity.class);
+				startActivity(intent);
+				MainActivity.this.finish();//跳转要关闭前一个activity
+			}
+			catch(Exception e){
+				Log.e(LOG_TAG, "onOptionsItemSelected: action_settings: "+e.getMessage());
+			}
 			return true;
 		}
 		
 		if(id == R.id.action_camselect) {
 			Intent intent = new Intent();
 			intent.setClass(MainActivity.this, CamSelectActivity.class);
+//			Bundle b = new Bundle();
+//			b.putInt("action_camselect", nCamSelected);
+//			intent.putExtras(b);
+			intent.putExtra("action_camselect", nCamSelected);
 			startActivity(intent);
-			MainActivity.this.finish();//跳转要关闭前一个activity
+			MainActivity.this.finish();
 			return true;
 		}
 		
 		if(id == R.id.action_resolutions){
-			new AlertDialog.Builder(MainActivity.this)
-        	.setTitle("分辨率支持")
-        	.setMessage(mUserCamera.mPreview.mStrResolutions)
-        	.setPositiveButton("确定",null)
-        	.show();
+//			new AlertDialog.Builder(MainActivity.this)
+//        	.setTitle("分辨率支持")
+//        	.setMessage(mUserCamera.mPreview.mStrResolutions)
+//        	.setPositiveButton("确定",null)
+//        	.show();
+			try{
+				Intent intent = new Intent();
+				intent.setClass(MainActivity.this, ResolutionSelectActivity.class);
+				String[] arrResolutions = 
+						CameraPreview.listResolutionsString.toArray(new String[CameraPreview.listResolutionsString.size()]);
+				intent.putExtra("action_resolutions", arrResolutions);
+				startActivity(intent);
+				MainActivity.this.finish();
+			}
+			catch(Exception e){
+				Log.e(LOG_TAG, "onOptionsItemSelected: action_resolutions: "+e.getMessage());
+			}
 			return true;
 		}
 		
@@ -191,19 +221,19 @@ public class MainActivity extends Activity {
 	
 	private void InitUserCamera(){
 		try{
-			nCamType = getIntent().getExtras().getInt("camType");
+			nCamSelected = getIntent().getExtras().getInt("camType");
 		}
 		catch(Exception e){
 			Log.e(LOG_TAG, "InitUserCamera: getIntent().getExtras().getInt(camType) exception");
 		}
 		
-		Log.i(LOG_TAG, "InitUserCamera: nCamType = "+String.valueOf(nCamType));
+		Log.i(LOG_TAG, "InitUserCamera: nCamType = "+String.valueOf(nCamSelected));
 
 		try{
-			if(nCamType == 0){
+			if(nCamSelected == 0){
 				mUserCamera = new UserCamera(this,UserCamera.CameraType.CAMERA_FRONT);	
 			}
-			if(nCamType == 1){
+			if(nCamSelected == 1){
 				mUserCamera = new UserCamera(this,UserCamera.CameraType.CAMERA_BACK);	
 			}
 			

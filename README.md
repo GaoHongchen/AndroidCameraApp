@@ -67,13 +67,7 @@ opencv for android 教程（环境搭建篇）：
 ## Android Camera
 * [http://opencamera.org.uk/](http://opencamera.org.uk/ "Open Camera")
 * [http://blog.rhesoft.com/2015/04/02/tutorial-how-to-use-camera-with-android-and-android-studio/](http://blog.rhesoft.com/2015/04/02/tutorial-how-to-use-camera-with-android-and-android-studio/ "How to use camera with Android and Android Studio")
-* [http://junjunguo.com/articles/android-take-photo-show-in-list-view/](http://junjunguo.com/articles/android-take-photo-show-in-list-view/ "Android take photo and save to gallery, choose photo from gallery and show in ListView")  
-
-### Issues
-* [http://stackoverflow.com/questions/8744994/android-camera-set-resolution](http://stackoverflow.com/questions/8744994/android-camera-set-resolution "Android Camera Set Resolution")
-* [http://stackoverflow.com/questions/10913181/camera-preview-is-not-restarting](http://stackoverflow.com/questions/10913181/camera-preview-is-not-restarting "camera preview is not restarting?")
-* [http://stackoverflow.com/questions/10913682/how-to-capture-and-save-an-image-using-custom-camera-in-android](http://stackoverflow.com/questions/10913682/how-to-capture-and-save-an-image-using-custom-camera-in-android "How to capture and save an image using custom camera in Android?")
-* [http://stackoverflow.com/questions/11121963/how-can-i-set-camera-preview-size-to-squared-aspect-ratio-in-a-squared-surfacevi](http://stackoverflow.com/questions/11121963/how-can-i-set-camera-preview-size-to-squared-aspect-ratio-in-a-squared-surfacevi "How can I set camera preview size to squared aspect ratio in a squared SurfaceView (like Instagram)")
+* [http://junjunguo.com/articles/android-take-photo-show-in-list-view/](http://junjunguo.com/articles/android-take-photo-show-in-list-view/ "Android take photo and save to gallery, choose photo from gallery and show in ListView")
 
 ## Gyroscope
 * GyroscopeExplorer App: [https://github.com/KEOpenSource/GyroscopeExplorer](https://github.com/KEOpenSource/GyroscopeExplorer)
@@ -88,7 +82,11 @@ opencv for android 教程（环境搭建篇）：
 * [http://www.cnblogs.com/weixing/archive/2013/08/14/3257077.html](http://www.cnblogs.com/weixing/archive/2013/08/14/3257077.html "Android自定义对话框(Dialog)位置,大小")
 * [http://blog.csdn.net/fancylovejava/article/details/21617553](http://blog.csdn.net/fancylovejava/article/details/21617553 "Android自定义对话框(Dialog)位置,大小")
 
-## Issues ##
+## Some Issues
+* [http://stackoverflow.com/questions/8744994/android-camera-set-resolution](http://stackoverflow.com/questions/8744994/android-camera-set-resolution "Android Camera Set Resolution")
+* [http://stackoverflow.com/questions/10913181/camera-preview-is-not-restarting](http://stackoverflow.com/questions/10913181/camera-preview-is-not-restarting "camera preview is not restarting?")
+* [http://stackoverflow.com/questions/10913682/how-to-capture-and-save-an-image-using-custom-camera-in-android](http://stackoverflow.com/questions/10913682/how-to-capture-and-save-an-image-using-custom-camera-in-android "How to capture and save an image using custom camera in Android?")
+* [http://stackoverflow.com/questions/11121963/how-can-i-set-camera-preview-size-to-squared-aspect-ratio-in-a-squared-surfacevi](http://stackoverflow.com/questions/11121963/how-can-i-set-camera-preview-size-to-squared-aspect-ratio-in-a-squared-surfacevi "How can I set camera preview size to squared aspect ratio in a squared SurfaceView (like Instagram)")
 
 ### How to draw rectangle in XML? ###
 
@@ -162,20 +160,9 @@ And we can modify the "Shape" color simply like this:
 * 让textView里面的内容水平居中：android:gravity="center_horizontal"
 * 让textView控件在它的父布局里水平居中：android:layout_gravity="center_horizontal"
 
-### Android Camera Preview Stretched
-
-**Link:** [http://stackoverflow.com/questions/19577299/android-camera-preview-stretched](http://stackoverflow.com/questions/19577299/android-camera-preview-stretched)
-
-### Using lists in Android (ListView) - Tutorial
+### Using lists in Android (ListView) - Tutorial  
 
 **Link:** [http://www.vogella.com/tutorials/AndroidListView/article.html](http://www.vogella.com/tutorials/AndroidListView/article.html)
 
-### 两个Activity之间通过Intent传值
-
-**Link:** [http://blog.csdn.net/aboy123/article/details/8567057](http://blog.csdn.net/aboy123/article/details/8567057)
-
 ### 解决Butter Knife空指针问题(在eclipse中使用)
 [http://blog.163.com/www_iloveyou_com/blog/static/211658372201552421557741/](http://blog.163.com/www_iloveyou_com/blog/static/211658372201552421557741/)
-
-### android实现顶部底部固定 中间可滑动
-[http://blog.csdn.net/az44yao/article/details/7715509](http://blog.csdn.net/az44yao/article/details/7715509)

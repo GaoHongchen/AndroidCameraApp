@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-
     <string name="app_name">AndroidCameraApp</string>
-        
+    
     <string name="activity_name_main">晨光相机</string>
     <string name="activity_name_setting">设置</string>
     <string name="activity_name_camselect">摄像头选择</string>
+    <string name="activity_name_resolutions">分辨率选择</string>
     
     <string name="action_settings">设置</string>
     <string name="action_camselect">摄像头选择</string>
-    <string name="action_resolutions">分辨率支持</string> 
-    
+    <string name="action_resolutions">分辨率选择</string>
     <string name="btnCapture">拍 照</string>
-
 </resources>

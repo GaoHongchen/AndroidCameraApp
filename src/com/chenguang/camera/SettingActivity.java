@@ -1,4 +1,6 @@
-package com.example.androidcameraapp;
+package com.chenguang.camera;
+
+import com.chenguang.camera.R;
 
 import android.app.ListActivity;
 import android.content.Intent;
