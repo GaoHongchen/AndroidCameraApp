@@ -15,7 +15,7 @@ import android.widget.ListView;
 public class CamSelectActivity extends Activity {
 
 	private ListView lv;
-	private final String[] values = new String[]{"Ç°ÖÃÉãÏñÍ·", "ºóÖÃÉãÏñÍ·"};
+	private final String[] values = new String[]{"å‰ç½®æ‘„åƒå¤´", "åç½®æ‘„åƒå¤´"};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="app_name">AndroidCameraApp</string>
+    <string name="app_name">ChenguangCam</string>
     
     <string name="activity_name_main">晨光相机</string>
     <string name="activity_name_setting">设置</string>

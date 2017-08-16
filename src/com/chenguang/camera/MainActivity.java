@@ -36,7 +36,6 @@ public class MainActivity extends Activity {
 	private int widthCameraPreview;
 	private int heightCameraPreview;
 	
-	//方向传感器相关变量
 	private ImageView imgCircleStatic;
 	private ImageView imgCircle;
 	private int xImgCircle;
@@ -44,7 +43,7 @@ public class MainActivity extends Activity {
 	private OrientationSensor orientationSensor;
 	
 	public MainActivity(){
-		nCamSelected = 1;//默认后置摄像头
+		nCamSelected = 1;
 	}
 	
 	@Override
@@ -52,18 +51,16 @@ public class MainActivity extends Activity {
 		
 		super.onCreate(savedInstanceState);
 		
-		//获得操作Camera的权限
 		CheckCameraPermission(this);
 		
 		setContentView(R.layout.activity_main);
 		setTitle(R.string.activity_name_main);
 		
-		Window window = getWindow();//得到窗口
-		//requestWindowFeature(Window.FEATURE_NO_TITLE);//没有标题
-		//window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏
-		window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//设置高亮
+		Window window = getWindow();
+		//requestWindowFeature(Window.FEATURE_NO_TITLE);
+		//window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-		//获取屏幕宽度和高度
 		WindowManager manager = this.getWindowManager();
 		DisplayMetrics outMetrics = new DisplayMetrics();
 		manager.getDefaultDisplay().getMetrics(outMetrics);
@@ -83,10 +80,9 @@ public class MainActivity extends Activity {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub 
 				mUserCamera.CaptureCamera();
-				//弹出Toast提示按钮被点击了
 				Toast.makeText(
 						MainActivity.this,
-						"照片保存成功\r\n"+mUserCamera.pathPhotos,Toast.LENGTH_SHORT
+						"Picture saved!\r\n"+mUserCamera.pathPhotos,Toast.LENGTH_SHORT
 						).show();
 			}
 		});
@@ -122,7 +118,7 @@ public class MainActivity extends Activity {
 				Intent intent = new Intent();
 				intent.setClass(MainActivity.this, SettingActivity.class);
 				startActivity(intent);
-				MainActivity.this.finish();//跳转要关闭前一个activity
+				MainActivity.this.finish();
 			}
 			catch(Exception e){
 				Log.e(LOG_TAG, "onOptionsItemSelected: action_settings: "+e.getMessage());
@@ -143,11 +139,6 @@ public class MainActivity extends Activity {
 		}
 		
 		if(id == R.id.action_resolutions){
-//			new AlertDialog.Builder(MainActivity.this)
-//        	.setTitle("分辨率支持")
-//        	.setMessage(mUserCamera.mPreview.mStrResolutions)
-//        	.setPositiveButton("确定",null)
-//        	.show();
 			try{
 				Intent intent = new Intent();
 				intent.setClass(MainActivity.this, ResolutionSelectActivity.class);
@@ -193,7 +184,6 @@ public class MainActivity extends Activity {
 		imgCircleStatic  = (ImageView)findViewById(R.id.img_circle_static);
 		imgCircle = (ImageView)findViewById(R.id.img_circle);
 		
-		//初始化圆图形的位置
 		ViewGroup.LayoutParams parasImgCircleStatic = imgCircleStatic.getLayoutParams();
 		int diameterCircleStatic = 100;
 		parasImgCircleStatic.width  = diameterCircleStatic;

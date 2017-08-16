@@ -68,7 +68,6 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 	public void surfaceCreated(SurfaceHolder holder) {
 		try {
 			if(typeCam == CameraType.CAMERA_BACK){
-				//orientation方向设置
 				if (this.getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE) {
 					parameters.set("orientation", "portrait");
 					mCamera.setDisplayOrientation(90);
@@ -82,7 +81,6 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 				}
 			}
 			if(typeCam == CameraType.CAMERA_FRONT){
-				//orientation方向设置
 				if (this.getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE) {
 					parameters.set("orientation", "portrait");
 					mCamera.setDisplayOrientation(90);
@@ -97,7 +95,6 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 			}
 			mCamera.setParameters(parameters);
 
-			//resolution手机相机分辨率设置
 			boolean bBestSizeSelected = false;
 			listResolutionsString.clear();
 			for (Size size : mSupportedPictureSizes) {					
@@ -105,11 +102,6 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 				int smaller= size.height< size.width ? size.height : size.width;
 				float ratio = longer / (float)smaller;
 				listResolutionsString.add(new DecimalFormat(".00").format(ratio) + "  " + longer + " * " + smaller + "\r\n");
-//				//范围不合适，在某些手机上容易闪退
-//				if(longer==640 && smaller==480){
-//					mSizeBest = size;
-//					break;
-//				}
 				if(ratio>1.3 && ratio<1.4 && longer>1000 && longer<5000 && !bBestSizeSelected){
 					parameters.setPictureSize(size.width, size.height);
 					bBestSizeSelected = true;

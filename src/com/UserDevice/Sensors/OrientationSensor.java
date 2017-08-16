@@ -36,7 +36,7 @@ public class OrientationSensor implements SensorEventListener{
 		
 		orientationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);	
 		if (orientationSensor == null) {
-			Toast.makeText(context, "你的手机不支持方向传感器", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, "Orientation Sensor not exist!", Toast.LENGTH_SHORT).show();
 		}
 	}
 	

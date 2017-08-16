@@ -21,7 +21,7 @@ public class SettingActivity extends ListActivity {
 		
 		setTitle(R.string.activity_name_setting);
 		
-		String[] values = new String[] { "相机设置","关于" };
+		String[] values = new String[] { "璁剧疆","鍏充簬" };
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, values);
 		setListAdapter(adapter);

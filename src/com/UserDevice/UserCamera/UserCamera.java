@@ -30,14 +30,12 @@ public class UserCamera{
 	public Camera mCamera=null;
 	public CameraPreview mPreview;
 	
-	//照片相关变量
 	public String pathPhotos; 	
 	private static File  dirDCIM;
 	private static final String dirPhotos = "AndroidCameraApp";
 	
 	public UserCamera(Context context,CameraType nCamType){
 		
-		//照片路径初始化
 		dirDCIM = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
 		pathPhotos = dirDCIM.toString() + "/" + dirPhotos;
 		
@@ -93,7 +91,7 @@ public class UserCamera{
 				break;
 			case CAMERA_BACK:
 				Log.i(LOG_TAG, "getCameraInstance: typeCam == CAMERA_BACK");
-				c = Camera.open(CamIdBack);//需要获得操作Camera的权限，否则会异常
+				c = Camera.open(CamIdBack);
 				break;
 			} 
 		}
