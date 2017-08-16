@@ -108,7 +108,7 @@ public class UserCamera{
 	}
 	
 	public void CaptureCamera(){
-		mCamera.takePicture(shutterCallback, rawCallback,null, mPicture);
+		mCamera.takePicture(shutterCallback, rawCallback,null, pictureCallback);
 	}
 
 	// Called when shutter is opened
@@ -125,16 +125,16 @@ public class UserCamera{
 		}
 	};
 
-	PictureCallback mPicture = new PictureCallback() {
+	PictureCallback pictureCallback = new PictureCallback() {
 		@Override
 		public void onPictureTaken(byte[] data, Camera camera) {
-			File pictureFile = getOutputMediaFile();
-			if (pictureFile == null) {
+			File filePicture = getOutputMediaFile();
+			if (filePicture == null) {
 				//Toast.makeText(getActivity(), "Image retrieval failed.", Toast.LENGTH_SHORT).show();
 				return;
 			}
 			try {
-				FileOutputStream fos = new FileOutputStream(pictureFile);
+				FileOutputStream fos = new FileOutputStream(filePicture);
 				fos.write(data);
 				fos.close();
 			} catch (FileNotFoundException e) {

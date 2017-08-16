@@ -34,15 +34,6 @@ public class ResolutionSelectActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				// TODO Auto-generated method stub
-				lv.setItemChecked(arg2, true);
-				
-				Intent intent = new Intent();
-				intent.setClass(ResolutionSelectActivity.this, MainActivity.class);
-				Bundle b = new Bundle();
-				b.putInt("ResolutionSelect", arg2);
-				intent.putExtras(b);
-				startActivity(intent);
-				ResolutionSelectActivity.this.finish();
 			}	
 		});
 	}
