@@ -27,3 +27,8 @@ proguard/
 *.ipr
 *.iws
 .idea/
+
+# Ant project files
+build.xml
+local.properties  
+proguard-project.txt

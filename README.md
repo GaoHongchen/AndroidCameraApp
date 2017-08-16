@@ -3,23 +3,6 @@ An Android Camera Project with ADT.
 
 ------
 
-## Development Requirements ##
-
-- JDK
-- Eclipse
-  * Eclipse IDE for Java Developers
-- EGit
-  * online install: http://download.eclipse.org/egit/updates/
-- ADT
-  * online install: https://dl-ssl.google.com/android/eclipse/
-  * offline install: Location：[jar:file:ADT-23.0.7.zip]()
-- Android SDK
-  * online install: http://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
-  * offline install: installer_r24.4.1-windows.exe
-  * [Android SDK开发包国内下载地址](http://www.cnblogs.com/bjzhanghao/archive/2012/11/14/android-platform-sdk-download-mirror.html)
-- [AndroidDevTools](https://github.com/inferjay/AndroidDevTools)
-
-
 ## Android Sites
 
 * [https://www.android.com/](https://www.android.com/)
@@ -32,11 +15,42 @@ An Android Camera Project with ADT.
 * [http://www.android100.org/](http://www.android100.org/)
 * [http://www.csdn.net/article/2015-07-30/2825333](http://www.csdn.net/article/2015-07-30/2825333 "开发第一个Android应用之前你需要知道的六件事")
 
-## 环境搭建 ##
-* [http://www.ibm.com/developerworks/opensource/tutorials/os-eclipse-androidwidget/](http://www.ibm.com/developerworks/opensource/tutorials/os-eclipse-androidwidget/ "Introduction to Android development Using Eclipse and Android widgets")
+## PreRequirements ##
+- JDK
+- Android SDK
+  * online install: http://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
+  * offline install: installer_r24.4.1-windows.exe
+  * [Android SDK开发包国内下载地址](http://www.cnblogs.com/bjzhanghao/archive/2012/11/14/android-platform-sdk-download-mirror.html)
+- [AndroidDevTools](https://github.com/inferjay/AndroidDevTools)
 
-## 程序调试
-* [http://www.cnblogs.com/qingblog/archive/2012/07/27/2611469.html](http://www.cnblogs.com/qingblog/archive/2012/07/27/2611469.html "Android eclipse中程序调试")
+### Ant Project
+- Ant
+
+### Eclipse Project
+- Eclipse
+  * Eclipse IDE for Java Developers
+- ADT
+  * online install: https://dl-ssl.google.com/android/eclipse/
+  * offline install: Location：[jar:file:ADT-23.0.7.zip]()
+- EGit
+  * online install: http://download.eclipse.org/egit/updates/
+
+## Build & install
+### Ant Project
+1) generate build.xml for Ant
+```
+android update project -p .
+```
+2) build ant project
+```
+ant debug
+```
+3) install apk file to devices
+```
+adb install <path_to_apk>
+```
+### Eclipse Project
+* [Introduction to Android development Using Eclipse and Android widgets](http://www.ibm.com/developerworks/opensource/tutorials/os-eclipse-androidwidget/)
 
 ## 应用打包
 在Eclipse中将Android工程打包成apk。
