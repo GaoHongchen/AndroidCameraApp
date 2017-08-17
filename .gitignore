@@ -32,3 +32,8 @@ proguard/
 build.xml
 local.properties  
 proguard-project.txt
+
+# Eclipse project files
+.classpath
+.project
+
