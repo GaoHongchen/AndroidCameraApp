@@ -31,6 +31,8 @@ public class MainActivity extends Activity {
 	
 	private static final String LOG_TAG = "GaoHCLog-->MainActivity";
 	
+	private boolean bCameraGranted=false;
+	
 	private UserCamera mUserCamera=null;
 	private int nCamSelected;
 	private int widthCameraPreview;
@@ -43,15 +45,12 @@ public class MainActivity extends Activity {
 	private OrientationSensor orientationSensor;
 	
 	public MainActivity(){
-		nCamSelected = 1;
+		nCamSelected = 1;//default back camera
 	}
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		
+	protected void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);
-		
-		CheckCameraPermission(this);
 		
 		setContentView(R.layout.activity_main);
 		setTitle(R.string.activity_name_main);
@@ -72,30 +71,53 @@ public class MainActivity extends Activity {
 		
 		InitOrientationSensor();
 		
-		InitUserCamera();
+		bCameraGranted = CheckCameraPermission(this);
+		if(true == bCameraGranted){		
+			InitUserCamera();		
+		}
 		
 		Button btnCapture = (Button)findViewById(R.id.button_capture);
 		btnCapture.setOnClickListener(new View.OnClickListener() {		
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub 
-				mUserCamera.CaptureCamera();
-				Toast.makeText(
-						MainActivity.this,
-						"Picture saved!\r\n"+mUserCamera.pathPhotos,Toast.LENGTH_SHORT
-						).show();
+				if(true == bCameraGranted){
+					mUserCamera.CaptureCamera();
+					Toast.makeText(
+							MainActivity.this,
+							"Picture saved!\r\n"+mUserCamera.pathPhotos,Toast.LENGTH_SHORT
+							).show();
+				}else{
+					Toast.makeText(MainActivity.this,"Camera Permission not Granted!!!",Toast.LENGTH_SHORT).show();
+				}
 			}
 		});
 	}
 
-	private void CheckCameraPermission(Context context) {
+	@Override
+	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+		// TODO Auto-generated method stub
+		//super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		switch (requestCode){
+		case 1:
+			if(grantResults.length >0 &&grantResults[0]==PackageManager.PERMISSION_GRANTED){
+				InitUserCamera();
+				bCameraGranted = true;
+			}
+			break;
+		}
+	}
+
+	private boolean CheckCameraPermission(Context context) {
 		// check Android 6 permission
-		if (ContextCompat.checkSelfPermission(context,
-				Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+        int checkCameraPermission = ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA);
+		if (checkCameraPermission == PackageManager.PERMISSION_GRANTED) {
 			Log.i(LOG_TAG, "CheckCameraPermission: Granted");
+            return true;
 		} else {
 			// 1 can be another integer
 			ActivityCompat.requestPermissions((Activity) context, new String[] { Manifest.permission.CAMERA }, 1);
+			return false;
 		}
 	}  
 	
