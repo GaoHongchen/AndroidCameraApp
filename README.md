@@ -1,5 +1,5 @@
 # AndroidCameraApp
-An Android Camera Project with ADT.
+An Android Camera Project.
 
 ------
 
@@ -52,21 +52,20 @@ adb install <path_to_apk>
 ### Eclipse Project
 * [Introduction to Android development Using Eclipse and Android widgets](http://www.ibm.com/developerworks/opensource/tutorials/os-eclipse-androidwidget/)
 
-## 应用打包
-在Eclipse中将Android工程打包成apk。
-
-* 生成keystore文件
-
-    keytool -genkey -alias Camera -keyalg RSA -validity 100000 -keystore AndroidCameraApp.keystore
-
-* 签名Apk文件
-
-（1）在Eclipse中右键单击项目名称，选择"Android Tools"，再选择"Export Signed Application Package…"；  
-（2）使用第三方工具：**爱加密签名工具**；  
-（3）使用命令行：  
+## Sign APK
+1) Generate keystore file  
 ```
-    jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore E:\AndroidCameraApp.keystore -storepass 123456 -keypass 123456 -signedjar E:\signed.apk E:\unsign.apk Camera
+    keytool -genkey -alias ChenguangCam -keyalg RSA -validity 100000 -keystore AndroidCameraApp.keystore
 ```
+2) Sign Apk
+* 使用第三方工具：**爱加密签名工具**；  
+* 使用命令行：  
+```
+    jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore  
+    <path_to_AndroidCameraApp.keystore> -storepass 123456 -keypass 123456 -signedjar <path_to_signed.apk> <path_to_unsign.apk> ChenguangCam
+```
+* Eclipse Project: 右键单击项目名称，选择"Android Tools"，再选择"Export Signed Application Package…"；
+* Ant Project: add **key.store** and **key.alias** properties to **ant.properties** file;
 
 ## 应用认领
 应用认领那些事：   
