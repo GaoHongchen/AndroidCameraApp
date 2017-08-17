@@ -4,6 +4,7 @@ import com.UserDevice.Sensors.OrientationSensor;
 import com.UserDevice.UserCamera.CameraPreview;
 import com.UserDevice.UserCamera.UserCamera;
 import com.chenguang.camera.R;
+import com.ndk.test.JNITest;
 
 import android.Manifest;
 import android.app.Activity;
@@ -28,6 +29,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
+	
+	static {
+        System.loadLibrary("JNITest");
+    }
 	
 	private static final String LOG_TAG = "GaoHCLog-->MainActivity";
 	
@@ -133,11 +138,11 @@ public class MainActivity extends Activity {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
 		
-		if (id == R.id.action_settings) {
+		Intent intent = new Intent();
+		switch(item.getItemId()){
+		case R.id.action_settings:
 			try{
-				Intent intent = new Intent();
 				intent.setClass(MainActivity.this, SettingActivity.class);
 				startActivity(intent);
 				MainActivity.this.finish();
@@ -145,11 +150,8 @@ public class MainActivity extends Activity {
 			catch(Exception e){
 				Log.e(LOG_TAG, "onOptionsItemSelected: action_settings: "+e.getMessage());
 			}
-			return true;
-		}
-		
-		if(id == R.id.action_camselect) {
-			Intent intent = new Intent();
+			break;
+		case R.id.action_camselect:
 			intent.setClass(MainActivity.this, CamSelectActivity.class);
 //			Bundle b = new Bundle();
 //			b.putInt("action_camselect", nCamSelected);
@@ -157,12 +159,9 @@ public class MainActivity extends Activity {
 			intent.putExtra("action_camselect", nCamSelected);
 			startActivity(intent);
 			MainActivity.this.finish();
-			return true;
-		}
-		
-		if(id == R.id.action_resolutions){
+			break;
+		case R.id.action_resolutions:
 			try{
-				Intent intent = new Intent();
 				intent.setClass(MainActivity.this, ResolutionSelectActivity.class);
 				String[] arrResolutions = 
 						CameraPreview.listResolutionsString.toArray(new String[CameraPreview.listResolutionsString.size()]);
@@ -173,10 +172,14 @@ public class MainActivity extends Activity {
 			catch(Exception e){
 				Log.e(LOG_TAG, "onOptionsItemSelected: action_resolutions: "+e.getMessage());
 			}
-			return true;
+			break;
+		case R.id.action_ndktest:
+			String strJNI = JNITest.AddString("", "");
+			Toast.makeText(MainActivity.this,strJNI,Toast.LENGTH_SHORT).show();
+			break;
 		}
-		
-		return super.onOptionsItemSelected(item);
+		return true;
+		//return super.onOptionsItemSelected(item);
 	}
 
 	@Override

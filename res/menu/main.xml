@@ -19,5 +19,11 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/action_resolutions"/>
+    
+    <item
+        android:id="@+id/action_ndktest"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_ndktest"/>
 
 </menu>

@@ -21,6 +21,8 @@ An Android Camera Project.
   * online install: http://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
   * offline install: installer_r24.4.1-windows.exe
   * [Android SDK开发包国内下载地址](http://www.cnblogs.com/bjzhanghao/archive/2012/11/14/android-platform-sdk-download-mirror.html)
+- Android NDK
+  * android-ndk-r14b
 - [AndroidDevTools](https://github.com/inferjay/AndroidDevTools)
 
 ### Ant Project
@@ -35,7 +37,14 @@ An Android Camera Project.
 - EGit
   * online install: http://download.eclipse.org/egit/updates/
 
-## Build & install
+## Generate .so or .a files using NDK tools
+1) Edit java file;  
+2) Generate header file for the java file using JDK tools **javac** and **javah**;  
+3) Edit **Android.mk** and **Application.mk** files;  
+4) Generate .so or .a files using command **ndk-build**;  
+5) Load the library and using its methods;
+
+## Build Android Project
 ### Ant Project
 1) generate build.xml for Ant
 ```
@@ -44,10 +53,6 @@ android update project -p .
 2) build ant project
 ```
 ant debug
-```
-3) install apk file to devices
-```
-adb install <path_to_apk>
 ```
 ### Eclipse Project
 * [Introduction to Android development Using Eclipse and Android widgets](http://www.ibm.com/developerworks/opensource/tutorials/os-eclipse-androidwidget/)
@@ -66,6 +71,12 @@ adb install <path_to_apk>
 ```
 * Eclipse Project: 右键单击项目名称，选择"Android Tools"，再选择"Export Signed Application Package…"；
 * Ant Project: add **key.store** and **key.alias** properties to **ant.properties** file;
+
+## Install APK
+Install apk file to devices
+```
+adb install <path_to_apk>
+```
 
 ## 应用认领
 应用认领那些事：   
