@@ -4,6 +4,7 @@ import com.UserDevice.Sensors.OrientationSensor;
 import com.UserDevice.UserCamera.CameraPreview;
 import com.UserDevice.UserCamera.UserCamera;
 import com.chenguang.camera.R;
+import com.ndk.fftw.FFTW3;
 import com.ndk.test.JNITest;
 
 import android.Manifest;
@@ -30,11 +31,15 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
-	static {
-        System.loadLibrary("JNITest");
-    }
-	
 	private static final String LOG_TAG = "GaoHCLog-->MainActivity";
+	  
+	private static String[] PERMISSIONS_CAMERA = { Manifest.permission.CAMERA };
+	private static String[] PERMISSIONS_STORAGE = { 
+	        Manifest.permission.WRITE_EXTERNAL_STORAGE,  
+	        Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS};
+	
+	private static final int REQUEST_PERMISSION_CAMERA = 1;
+	private static final int REQUEST_EXTERNAL_STORAGE  = 2;
 	
 	private boolean bCameraGranted=false;
 	
@@ -48,7 +53,7 @@ public class MainActivity extends Activity {
 	private int xImgCircle;
 	private int yImgCircle;
 	private OrientationSensor orientationSensor;
-	
+		
 	public MainActivity(){
 		nCamSelected = 1;//default back camera
 	}
@@ -75,6 +80,8 @@ public class MainActivity extends Activity {
 		heightCameraPreview = widthWin*4/3;
 		
 		InitOrientationSensor();
+			
+		CheckStoragePermissions(this);
 		
 		bCameraGranted = CheckCameraPermission(this);
 		if(true == bCameraGranted){		
@@ -104,10 +111,20 @@ public class MainActivity extends Activity {
 		// TODO Auto-generated method stub
 		//super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 		switch (requestCode){
-		case 1:
-			if(grantResults.length >0 &&grantResults[0]==PackageManager.PERMISSION_GRANTED){
+		case REQUEST_PERMISSION_CAMERA:
+			if(grantResults.length >0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+				Log.i(LOG_TAG, "onRequestPermissionsResult REQUEST_PERMISSION_CAMERA: Granted");
 				InitUserCamera();
 				bCameraGranted = true;
+			}else{
+				CloseApp();
+			}
+			break;
+		case REQUEST_EXTERNAL_STORAGE:
+			if(grantResults.length >0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+				Log.i(LOG_TAG, "onRequestPermissionsResult REQUEST_EXTERNAL_STORAGE: Granted");
+			}else{
+				CloseApp();
 			}
 			break;
 		}
@@ -116,15 +133,25 @@ public class MainActivity extends Activity {
 	private boolean CheckCameraPermission(Context context) {
 		// check Android 6 permission
         int checkCameraPermission = ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA);
-		if (checkCameraPermission == PackageManager.PERMISSION_GRANTED) {
+		if (checkCameraPermission != PackageManager.PERMISSION_GRANTED) {
+			ActivityCompat.requestPermissions((Activity) context, PERMISSIONS_CAMERA, REQUEST_PERMISSION_CAMERA);
+			return false;
+		} else {
 			Log.i(LOG_TAG, "CheckCameraPermission: Granted");
             return true;
-		} else {
-			// 1 can be another integer
-			ActivityCompat.requestPermissions((Activity) context, new String[] { Manifest.permission.CAMERA }, 1);
-			return false;
 		}
 	}  
+	
+	private boolean CheckStoragePermissions(Activity activity) {  
+	    int checkStoragePermissions = ActivityCompat.checkSelfPermission(activity,Manifest.permission.WRITE_EXTERNAL_STORAGE);  	  
+	    if (checkStoragePermissions != PackageManager.PERMISSION_GRANTED) {  
+	        ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE,REQUEST_EXTERNAL_STORAGE); 
+	        return false;
+	    } else {
+	    	Log.i(LOG_TAG, "CheckStoragePermissions: Granted");
+	    	return true;
+	    }
+	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -174,8 +201,9 @@ public class MainActivity extends Activity {
 			}
 			break;
 		case R.id.action_ndktest:
-			String strJNI = JNITest.AddString("", "");
-			Toast.makeText(MainActivity.this,strJNI,Toast.LENGTH_SHORT).show();
+//			String strJNI = JNITest.AddString("", "");
+			FFTW3.DFT2DfromPath(mUserCamera.pathPhotos);
+			Toast.makeText(MainActivity.this,"FFTW3.DFT2DfromPath",Toast.LENGTH_SHORT).show();
 			break;
 		}
 		return true;
@@ -202,6 +230,11 @@ public class MainActivity extends Activity {
 		super.onStop();
 		
 		orientationSensor.UnRegisterListener();
+	}
+	
+	private void CloseApp(){
+		android.os.Process.killProcess(android.os.Process.myPid());
+	    System.exit(0);
 	}
 	
 	
