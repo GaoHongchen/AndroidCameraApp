@@ -25,10 +25,10 @@ An Android Camera Project.
   * android-ndk-r14b
 - [AndroidDevTools](https://github.com/inferjay/AndroidDevTools)
 
-### Ant Project
+(1) Ant Project  
 - Ant
 
-### Eclipse Project
+(2) Eclipse Project  
 - Eclipse
   * Eclipse IDE for Java Developers
 - ADT
@@ -37,27 +37,28 @@ An Android Camera Project.
 - EGit
   * online install: http://download.eclipse.org/egit/updates/
 
-## Generate .so or .a files using NDK tools
+## Build & Install
+### Generate .so or .a files using NDK tools
 1) Edit java file;  
 2) Generate header file for the java file using JDK tools **javac** and **javah**;  
 3) Edit **Android.mk** and **Application.mk** files;  
 4) Generate .so or .a files using command **ndk-build**;  
 5) Load the library and using its methods;
 
-## Build Android Project
-### Ant Project
+### Build Android Project
+#### Ant Project
 1) generate build.xml for Ant
 ```
 android update project -p .
 ```
 2) build ant project
 ```
-ant debug
+ant debug/release
 ```
-### Eclipse Project
+#### Eclipse Project
 * [Introduction to Android development Using Eclipse and Android widgets](http://www.ibm.com/developerworks/opensource/tutorials/os-eclipse-androidwidget/)
 
-## Sign APK
+### Sign APK
 1) Generate keystore file  
 ```
     keytool -genkey -alias ChenguangCam -keyalg RSA -validity 100000 -keystore AndroidCameraApp.keystore
@@ -72,15 +73,42 @@ ant debug
 * Eclipse Project: 右键单击项目名称，选择"Android Tools"，再选择"Export Signed Application Package…"；
 * Ant Project: add **key.store** and **key.alias** properties to **ant.properties** file;
 
-## Install APK
+### Install APK
 Install apk file to devices
 ```
 adb install <path_to_apk>
 ```
 
-## 应用认领
+### 应用认领
 应用认领那些事：   
 [http://droidyue.com/blog/2014/12/14/android-yingyong-renling/?utm_source=tuicool&utm_medium=referral](http://droidyue.com/blog/2014/12/14/android-yingyong-renling/?utm_source=tuicool&utm_medium=referral)
+
+## NDK Related
+Android NDK 从2013年开始支持了C++11，从2015年开始支持C++14。  
+在 Android.mk 中加入  
+c++ 11 标准：
+```
+LOCAL_CPPFLAGS += -std=c++11
+LOCAL_CPPFLAGS += -D__cplusplus=201103L  
+```
+c++ 14 标准：  
+```
+LOCAL_CPPFLAGS += -std=c++1y
+LOCAL_CPPFLAGS += -D__cplusplus=201300L
+```
+When compiling c++ code with **-std=c++11** and using **gnustl_shared**, many **C99 math functions** are not provided by the <cmath> header as they should. At this time,`APP_STL := c++_static` may help.(from Issue: [C++11 cmath functions not in std namespace](https://stackoverflow.com/a/22924781/6560660))
+
+### CImg
+**Note:**  
+Add the following code in CImg.h from https://github.com/dtschump/CImg.git to NOT use Xlib.h:  
+```
+#undef cimg_display
+#define cimg_display 0
+```
+
+### FFTW
+It is best to download official tarballs from http://fftw.org/, other than using its github repository!!!    
+Build Reference: [fftw_android( from he-kai github )](https://github.com/hekai/fftw_android)
 
 ## OpenCV for Android
 [http://opencv.org/platforms/android.html](http://opencv.org/platforms/android.html "OpenCV for Android")
