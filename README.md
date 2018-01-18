@@ -1,9 +1,9 @@
-# AndroidCameraApp
+# Android Camera App
 An Android Camera Project.
 
 ------
 
-## Android Sites
+# Android Sites
 
 * [https://www.android.com/](https://www.android.com/)
 * [http://www.anddev.org/](http://www.anddev.org/)
@@ -15,7 +15,7 @@ An Android Camera Project.
 * [http://www.android100.org/](http://www.android100.org/)
 * [http://www.csdn.net/article/2015-07-30/2825333](http://www.csdn.net/article/2015-07-30/2825333 "开发第一个Android应用之前你需要知道的六件事")
 
-## PreRequirements ##
+# PreRequirements
 - JDK
 - Android SDK
   * online install: http://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
@@ -37,7 +37,7 @@ An Android Camera Project.
 - EGit
   * online install: http://download.eclipse.org/egit/updates/
 
-## Build & Install
+# Build & Install
 ### Generate .so or .a files using NDK tools
 1) Edit java file;  
 2) Generate header file for the java file using JDK tools **javac** and **javah**;  
@@ -46,6 +46,7 @@ An Android Camera Project.
 5) Load the library and using its methods;
 
 ### Build Android Project
+
 #### Ant Project
 1) generate build.xml for Ant
 ```
@@ -78,12 +79,17 @@ Install apk file to devices
 ```
 adb install <path_to_apk>
 ```
+### Debug
 
 ### 应用认领
 应用认领那些事：   
 [http://droidyue.com/blog/2014/12/14/android-yingyong-renling/?utm_source=tuicool&utm_medium=referral](http://droidyue.com/blog/2014/12/14/android-yingyong-renling/?utm_source=tuicool&utm_medium=referral)
 
-## NDK Related
+
+# NDK
+
+## Android.mk
+
 Android NDK 从2013年开始支持了C++11，从2015年开始支持C++14。  
 在 Android.mk 中加入  
 c++ 11 标准：
@@ -98,6 +104,9 @@ LOCAL_CPPFLAGS += -D__cplusplus=201300L
 ```
 When compiling c++ code with **-std=c++11** and using **gnustl_shared**, many **C99 math functions** are not provided by the <cmath> header as they should. At this time,`APP_STL := c++_static` may help.(from Issue: [C++11 cmath functions not in std namespace](https://stackoverflow.com/a/22924781/6560660))
 
+
+## 3rdParty
+
 ### CImg
 **Note:**  
 Add the following code in CImg.h from https://github.com/dtschump/CImg.git to NOT use Xlib.h:  
@@ -110,13 +119,16 @@ Add the following code in CImg.h from https://github.com/dtschump/CImg.git to NO
 It is best to download official tarballs from http://fftw.org/, other than using its github repository!!!    
 Build Reference: [fftw_android( from he-kai github )](https://github.com/hekai/fftw_android)
 
-## OpenCV for Android
+### OpenCV for Android
 [http://opencv.org/platforms/android.html](http://opencv.org/platforms/android.html "OpenCV for Android")
 
 opencv for android 教程（环境搭建篇）：
 [http://blog.csdn.net/pwh0996/article/details/8957764](http://blog.csdn.net/pwh0996/article/details/8957764)
 
-## Android Camera
+
+# Android App
+
+## Camera
 * [http://opencamera.org.uk/](http://opencamera.org.uk/ "Open Camera")
 * [http://blog.rhesoft.com/2015/04/02/tutorial-how-to-use-camera-with-android-and-android-studio/](http://blog.rhesoft.com/2015/04/02/tutorial-how-to-use-camera-with-android-and-android-studio/ "How to use camera with Android and Android Studio")
 * [http://junjunguo.com/articles/android-take-photo-show-in-list-view/](http://junjunguo.com/articles/android-take-photo-show-in-list-view/ "Android take photo and save to gallery, choose photo from gallery and show in ListView")
