@@ -227,6 +227,3 @@ And we can modify the "Shape" color simply like this:
 ### Using lists in Android (ListView) - Tutorial  
 
 **Link:** [http://www.vogella.com/tutorials/AndroidListView/article.html](http://www.vogella.com/tutorials/AndroidListView/article.html)
-
-### 解决Butter Knife空指针问题(在eclipse中使用)
-[http://blog.163.com/www_iloveyou_com/blog/static/211658372201552421557741/](http://blog.163.com/www_iloveyou_com/blog/static/211658372201552421557741/)
