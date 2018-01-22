@@ -1,4 +1,4 @@
-package com.ndk.fftw;
+package com.ndk.test;
 
 public class FFTW3 {
 	

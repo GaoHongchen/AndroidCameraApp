@@ -4,7 +4,7 @@ import com.UserDevice.Sensors.OrientationSensor;
 import com.UserDevice.UserCamera.CameraPreview;
 import com.UserDevice.UserCamera.UserCamera;
 import com.chenguang.camera.R;
-import com.ndk.fftw.FFTW3;
+import com.ndk.test.FFTW3;
 import com.ndk.test.JNITest;
 
 import android.Manifest;
@@ -201,9 +201,9 @@ public class MainActivity extends Activity {
 			}
 			break;
 		case R.id.action_ndktest:
-//			String strJNI = JNITest.AddString("", "");
-			FFTW3.DFT2DfromPath(mUserCamera.pathPhotos);
-			Toast.makeText(MainActivity.this,"FFTW3.DFT2DfromPath",Toast.LENGTH_SHORT).show();
+			String strJNI = JNITest.AddString("", "");
+//			FFTW3.DFT2DfromPath(mUserCamera.pathPhotos);
+			Toast.makeText(MainActivity.this, strJNI, Toast.LENGTH_SHORT).show();
 			break;
 		}
 		return true;
