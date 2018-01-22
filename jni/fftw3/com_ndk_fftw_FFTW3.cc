@@ -1,4 +1,4 @@
-#include "com_ndk_fftw_FFTW3.h"
+#include "com_ndk_test_FFTW3.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -10,8 +10,9 @@ using namespace cimg_library;
 
 #include <android/log.h>
 
-#define LOG_TAG	"com_ndk_fftw_FFTW3"
 #undef  LOG
+#define LOG_TAG	"com_ndk_test_FFTW3"
+
 #define LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG,__VA_ARGS__)
 #define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
 #define LOGW(...)  __android_log_print(ANDROID_LOG_WARN,LOG_TAG,__VA_ARGS__)
@@ -21,11 +22,11 @@ using namespace cimg_library;
 #include "Tools/types.h"
 
 /*
- * Class:     com_ndk_fftw_FFTW3
+ * Class:     com_ndk_test_FFTW3
  * Method:    DFT2DfromPath
  * Signature: (Ljava/lang/String;)V
  */
-JNIEXPORT void JNICALL Java_com_ndk_fftw_FFTW3_DFT2DfromPath(JNIEnv *pEnv, jclass arg, jstring imgPath)
+JNIEXPORT void JNICALL Java_com_ndk_test_FFTW3_DFT2DfromPath(JNIEnv *pEnv, jclass arg, jstring imgPath)
 {
 	char *imgDir = jstring2pchar(pEnv,imgPath);
 	std::string strImgDir = (std::string)imgDir+"/";
@@ -41,7 +42,7 @@ JNIEXPORT void JNICALL Java_com_ndk_fftw_FFTW3_DFT2DfromPath(JNIEnv *pEnv, jclas
 	N=imgIn.size();
 	Nx=imgIn.width();
 	Ny=imgIn.height();
-	CImg<float> imgOut(Nx,Ny,1,3,0);// Êä³ö·ù¶ÈÆ×
+	CImg<float> imgOut(Nx,Ny,1,3,0);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	fftwf_complex *in  = (fftwf_complex*)fftwf_malloc(Ny*Nx*sizeof(fftwf_complex));
 	fftwf_complex *out = (fftwf_complex*)fftwf_malloc(Ny*Nx*sizeof(fftwf_complex));
@@ -94,11 +95,11 @@ JNIEXPORT void JNICALL Java_com_ndk_fftw_FFTW3_DFT2DfromPath(JNIEnv *pEnv, jclas
 }
 
 /*
- * Class:     com_ndk_fftw_FFTW3
+ * Class:     com_ndk_test_FFTW3
  * Method:    DFT2DfromAddr
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_ndk_fftw_FFTW3_DFT2DfromAddr(JNIEnv *pEnv, jclass arg, jlong imgAddr)
+JNIEXPORT void JNICALL Java_com_ndk_test_FFTW3_DFT2DfromAddr(JNIEnv *pEnv, jclass arg, jlong imgAddr)
 {
 
 }
