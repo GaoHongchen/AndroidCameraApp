@@ -6,6 +6,7 @@ import com.UserDevice.UserCamera.UserCamera;
 import com.chenguang.camera.R;
 import com.ndk.test.FFTW3;
 import com.ndk.test.JNITest;
+import com.ndk.test.NEONTest;
 
 import android.Manifest;
 import android.app.Activity;
@@ -203,6 +204,7 @@ public class MainActivity extends Activity {
 		case R.id.action_ndktest:
 			String strJNI = JNITest.AddString("", "");
 //			FFTW3.DFT2DfromPath(mUserCamera.pathPhotos);
+			NEONTest.test();
 			Toast.makeText(MainActivity.this, strJNI, Toast.LENGTH_SHORT).show();
 			break;
 		}

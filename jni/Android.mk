@@ -17,6 +17,13 @@ LOCAL_MODULE := FFTW3
 LOCAL_LDLIBS := -L$(SYSROOT)/usr/lib -llog
 LOCAL_STATIC_LIBRARIES := libfftw3f
 LOCAL_SRC_FILES := fftw3/com_ndk_test_FFTW3.cc Tools/types.cc
-LOCAL_CPPFLAGS += -std=c++11
-LOCAL_CPPFLAGS += -D__cplusplus=201103L
+include $(BUILD_SHARED_LIBRARY)
+
+##### NEONTest
+LOCAL_PATH = $(JNI_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE := NEONTest
+LOCAL_LDLIBS := -L$(SYSROOT)/usr/lib -llog
+LOCAL_SRC_FILES := NEONTest/com_ndk_test_NEONTest.cc
+LOCAL_CPPFLAGS += -fno-tree-vectorize
 include $(BUILD_SHARED_LIBRARY)
