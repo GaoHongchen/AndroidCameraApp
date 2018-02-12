@@ -38,6 +38,20 @@ An Android Camera Project.
   * online install: http://download.eclipse.org/egit/updates/
 
 # Build & Install
+
+### Environments Config
+```
+export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_141
+export CLASSPATH=${JAVA_HOME}/lib
+export PATH=${JAVA_HOME}/bin:$PATH
+
+export ANDROID_SDK=/home/gordon/Tools/android-sdk-linux
+export PATH=$PATH:$ANDROID_SDK/tools
+
+export ANDROID_NDK=/home/gordon/Tools/android-ndk-r14b  # android-ndk-r9d
+export PATH=$PATH:$ANDROID_NDK:$ANDROID_NDK/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/bin
+```
+
 ### Generate .so or .a files using NDK tools
 1) Edit java file;  
 2) Generate header file for the java file using JDK tools **javac** and **javah**;  
