@@ -14,6 +14,7 @@ include $(BUILD_SHARED_LIBRARY)
 LOCAL_PATH = $(JNI_PATH)
 include $(CLEAR_VARS)
 LOCAL_MODULE := FFTW3
+LOCAL_CPPFLAGS := -w # ignore warning
 LOCAL_LDLIBS := -L$(SYSROOT)/usr/lib -llog
 LOCAL_STATIC_LIBRARIES := libfftw3f
 LOCAL_SRC_FILES := FFTW3/com_ndk_test_FFTW3.cc Tools/types.cc

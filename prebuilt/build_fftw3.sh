@@ -5,7 +5,7 @@ set -o errexit
 # Make sure you have ANDROID_NDK defined in .bashrc or .bash_profile
 
 PROJECT_ROOT="`pwd`/../"
-INSTALL_DIR="$PROJECT_ROOT/ndk-modules/fftw3"
+INSTALL_DIR="$PROJECT_ROOT/jni/ndk-modules/fftw3"
 mkdir -p $INSTALL_DIR
 
 NDK_DIR=${ANDROID_NDK}
