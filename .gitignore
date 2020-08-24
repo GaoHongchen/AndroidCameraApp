@@ -48,10 +48,10 @@ libs/x86_64/
 prebuilt/fftw-3.3.3
 
 # generated files
-jni/fftw3/bin/
-jni/fftw3/include/
-jni/fftw3/lib/
-jni/fftw3/share/
+ndk-modules/fftw3/bin/
+ndk-modules/fftw3/include/
+ndk-modules/fftw3/lib/
+ndk-modules/fftw3/share/
 
 # tarball
 *.tar*

@@ -2,13 +2,13 @@
 set -o errexit
 
 # Compiles fftw3 for Android
-# Make sure you have ANDROID_NDK_HOME defined in .bashrc or .bash_profile
+# Make sure you have ANDROID_NDK defined in .bashrc or .bash_profile
 
 PROJECT_ROOT="`pwd`/../"
-INSTALL_DIR="$PROJECT_ROOT/jni/fftw3"
+INSTALL_DIR="$PROJECT_ROOT/ndk-modules/fftw3"
 mkdir -p $INSTALL_DIR
 
-NDK_DIR=${ANDROID_NDK_HOME}
+NDK_DIR=${ANDROID_NDK}
 
 export PATH="$NDK_DIR/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/bin/:$PATH"
 export SYS_ROOT="$NDK_DIR/platforms/android-9/arch-arm/"
