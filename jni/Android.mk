@@ -29,5 +29,22 @@ LOCAL_SRC_FILES := NEONTest/com_ndk_test_NEONTest.cc
 LOCAL_CPPFLAGS += -fno-tree-vectorize
 include $(BUILD_SHARED_LIBRARY)
 
+##### OpenCVTest
+LOCAL_PATH = $(JNI_PATH)
+include $(CLEAR_VARS)
+OPENCV_INSTALL_MODULES:=on
+OPENCV_LIB_TYPE:=SHARED
+# OPENCV_LIB_TYPE:=STATIC
+ifeq ("$(wildcard $(OPENCV_MK_PATH))","")  
+    include /opt/opencv_android_sdk/sdk/native/jni/OpenCV.mk
+else  
+    include $(OPENCV_MK_PATH)
+endif
+LOCAL_MODULE := OpenCVTest
+LOCAL_LDLIBS += -L$(SYSROOT)/usr/lib -llog
+LOCAL_SRC_FILES += OpenCVTest/com_ndk_test_OpenCVTest.cpp
+LOCAL_CPPFLAGS += -fno-tree-vectorize
+include $(BUILD_SHARED_LIBRARY)
+
 $(call import-add-path, $(JNI_PATH)/ndk-modules)
 $(call import-module, fftw3)
